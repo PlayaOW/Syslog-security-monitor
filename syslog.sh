@@ -63,4 +63,70 @@ ssh_connection_efforts(){
     fi
 }
 
+print_manual(){
+    cat <<EOF
+------------------------------------------------------------
+                SYSLOG.SH - SYSTEM LOG MONITOR
+------------------------------------------------------------
+Author: Rayhanul Karim
+Development Date: 08/15/2025
+Email: RAYHANULKARIM313@GMAIL.COM
+
+Description:
+    This script monitors system logs and sends email alerts to the
+    system administrator for the following critical events:
+    - Authorization failures
+    - Resource contention (CPU, memory, swap)
+    - SSH brute-force login attempts
+
+USAGE:
+    ./syslog.sh "Authorization Failure Test"
+        - Detects unauthorized login attempts from auth.log.
+        - Sends an alert email if more than 10 failures are found.
+        - Shuts down the system if attack suspected.
+
+    ./syslog.sh "Resource Contention"
+        - Checks for top CPU and memory-consuming processes.
+        - Reports current swap usage.
+        - Sends a detailed resource usage report via email.
+
+    ./syslog.sh "SSH Connection Efforts"
+        - Monitors failed SSH login attempts.
+        - Displays attacking IPs and sends an alert email.
+
+    ./syslog.sh man
+        - Displays this help manual.
+
+REQUIREMENTS:
+    Must be run with root privileges to access /var/log/auth.log
+    Dependencies: grep, awk, ps, top, mail, shutdown
+
+NOTE:
+    Configure your mail system (e.g., sendmail or postfix)
+    for the script to successfully send emails.
+
+------------------------------------------------------------
+EOF
+}
+
+
+case $1 in
+    Authorization Failure Test)
+        auth_failure_test
+        ;;
+    Resource Contention)
+        Resource_Contention
+        ;;
+    SSH Connection Efforts)
+        ssh_connection_efforts
+        ;;
+    Manual)
+        print_manual
+        ;;
+    *)
+        echo "Usage: $0 {Authorization Failure Test|Resource Contention|SSH Connection Efforts|Manual}"
+        exit 1
+        ;;
+esac
+
 
