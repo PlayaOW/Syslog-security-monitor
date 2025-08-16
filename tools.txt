@@ -1,0 +1,11 @@
+install sar command
+Update your system
+sudo apt install sysstat
+sudo nano or vi /etc/default/sysstat
+set ENABLED to true
+us means user space
+ user space is where program runs.
+
+sy means system or kernel space\
+id means idle, how much time the CPU has been idle for. The higher the number, the more idle the system is.
+
