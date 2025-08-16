@@ -111,16 +111,16 @@ EOF
 
 
 case $1 in
-    Authorization Failure Test)
+    "Authorization Failure Test")
         auth_failure_test
         ;;
-    Resource Contention)
+    "Resource Contention")
         Resource_Contention
         ;;
-    SSH Connection Efforts)
+    "SSH Connection Efforts")
         ssh_connection_efforts
         ;;
-    Manual)
+    "Manual")
         print_manual
         ;;
     *)
