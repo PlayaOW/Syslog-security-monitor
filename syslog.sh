@@ -7,7 +7,7 @@
 readonly EMAIL="RAYHANULKARIM313@GMAIL.COM"     #Email address of primary SysAdmin
 
 auth_failure_test(){
-    LOGIN_LOGS=$(grep "authorization failure" /var/log/auth.log)
+    LOGIN_LOGS=$(grep "authentication failure" /var/log/auth.log)
     COUNT=$(echo "$LOGIN_LOGS" | wc -l)
     if ! [[ -z "$LOGIN_LOGS" && "$COUNT" -le 10 ]]; then
         echo "Unauthorized login attempts detected."
@@ -15,6 +15,7 @@ auth_failure_test(){
         echo "Alert sent to $EMAIL"
         echo "Total unauthorized login attempts: $COUNT"
         echo "Shutting down the system to prevent further unauthorized access."
+        sleep 10 # Wait 10 seconds before shutdown
         shutdown -h now
     else
         echo "No unauthorized login attempts found."
